@@ -20,12 +20,16 @@ obj/
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+.idea/**/*.xml
+.idea/**/.gitignore
 
 # AWS User-specific
 .idea/**/aws.xml
 
 # Generated files
+.idea/**/*.iml
 .idea/**/contentModel.xml
+.idea/**/modules.xml
 
 # Sensitive or high-churn files
 .idea/**/dataSources/
@@ -499,6 +503,10 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+Thumbs.db
+Desktop.ini
+.DS_Store
 
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
