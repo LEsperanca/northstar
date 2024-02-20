@@ -20,7 +20,7 @@ obj/
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
-.idea/**/*.xml
+.idea/**/**/*.xml
 .idea/**/.gitignore
 
 # AWS User-specific
