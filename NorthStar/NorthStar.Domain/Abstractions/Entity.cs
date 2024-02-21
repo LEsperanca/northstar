@@ -9,6 +9,10 @@ public abstract class Entity
     }
 
     public Guid Id { get; init; }
+    
+    public DateTime Created { get; set; }
+    
+    public DateTime Updated { get; set; }
 
     public IReadOnlyList<IDomainEvent> GetDomainEvents()
     {
