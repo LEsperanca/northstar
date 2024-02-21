@@ -1,0 +1,16 @@
+<Project>
+  <PropertyGroup>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <Authors>North Star Team</Authors>
+    <Company>North Star Team</Company>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <RepositoryUrl>https://github.com/LEsperanca/northstar</RepositoryUrl>
+    <PackageReleaseNotes>https://github.com/LEsperanca/northstar/releases</PackageReleaseNotes>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <PackageIconUrl>http://go.microsoft.com/fwlink/?LinkID=288890</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/LEsperanca/northstar</PackageProjectUrl>
+    <Copyright>North Star Team. All rights reserved.</Copyright>
+    <PackageTags>North Star</PackageTags>
+  </PropertyGroup>
+</Project>
