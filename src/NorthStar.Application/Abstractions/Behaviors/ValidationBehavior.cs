@@ -1,6 +1,8 @@
 ﻿namespace NorthStar.Application.Abstractions.Behaviors;
 
+using FluentValidation;
 using MediatR;
+using NorthStar.Application.Abstractions.Exceptions;
 using NorthStar.Application.Abstractions.Messaging;
 
 public class ValidationBehavior<TRequest, TResponse>
