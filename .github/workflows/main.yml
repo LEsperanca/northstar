@@ -9,7 +9,8 @@ on:
 env:
   AZURE_WEBAPP_NAME: northstar-api
   AZURE_WEBAPP_PACKAGE_PATH: "./publish"
-
+  DOTNET_VERSION: '8.0.x'
+  
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -20,8 +21,16 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: ${{ env.DOTNET_VERSION }}
           
+      - name: Set up dependency caching for faster builds
+        uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+            
       - name: Restore
         run: dotnet restore ./NorthStar.sln
         
