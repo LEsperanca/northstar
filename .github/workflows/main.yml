@@ -35,7 +35,7 @@ jobs:
         run: dotnet restore ./NorthStar.sln
         
       - name: Build
-        run: dotnet build ./NorthStar.sln --configuration Release --no-restore -v diag
+        run: dotnet build ./NorthStar.sln --configuration Release --no-restore
         
       - name: Publish
         run: dotnet publish ./NorthStar.sln --configuration Release --no-build --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
