@@ -8,8 +8,13 @@ public abstract class Entity
         Id = id;
     }
 
+<<<<<<< HEAD
     protected Entity()
     {
+=======
+    protected Entity()
+    {
+>>>>>>> Not Yet Functional
     }
 
     public Guid Id { get; init; }

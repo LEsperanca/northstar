@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NorthStar.Application.Abstractions.Exceptions;
 
 namespace NorthStar.Api.Middleware;
 
