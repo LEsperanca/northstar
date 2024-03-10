@@ -1,3 +1,19 @@
+using NorthStar.Domain.Abstractions;
+
 namespace NorthStar.Domain.People;
 
-public record Name(string FirstName, string LastName);
+public class Name : ValueObject
+{
+
+    public string Value { get; private set; }
+
+    public Name(string name)
+    {
+        Value = name;
+    }
+
+    protected override IEnumerable<object> GetEqualityComponents()
+    {
+        yield return Value ;
+    }
+}

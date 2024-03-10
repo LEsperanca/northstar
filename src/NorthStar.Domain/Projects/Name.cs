@@ -1,3 +1,25 @@
+using NorthStar.Domain.Abstractions;
+
 namespace NorthStar.Domain.Projects;
 
-public record Name(string name);
+public class Name : ValueObject
+{
+    public string Value { get; private set; }
+
+    public Name(string name)
+    {
+        if (string.IsNullOrEmpty(name))
+        {
+            throw new ArgumentNullException();
+        }
+
+        Value = name;
+    }
+
+    protected override IEnumerable<object> GetEqualityComponents()
+    {
+        yield return Value;
+    }
+
+    
+}

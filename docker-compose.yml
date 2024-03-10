@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+  northstar.api:
+    image: ${DOCKER_REGISTRY-}northstarapi
+    container_name: Northstar.api
+    build:
+      context: .
+      dockerfile: src/NorthStar.Api/Dockerfile
+    depends_on:
+      - northstar-db
+
+  northstar-db:
+    image: postgres:latest
+    container_name: Northstar.Db
+    environment:
+      - POSTGRES_DB=northstar
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./.containers/database:/var/lib/postgresql/data
+    ports:
+     - 5432:5432
+

@@ -1,4 +1,4 @@
-namespace NorthStar.Domain.Shared;
+namespace NorthStar.Domain.WorkItems;
 
 public enum Priority
 {

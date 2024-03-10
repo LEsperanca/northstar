@@ -3,10 +3,18 @@ namespace NorthStar.Domain.WorkItems;
 using NorthStar.Domain.Abstractions;
 using NorthStar.Domain.People;
 using NorthStar.Domain.Projects;
-using NorthStar.Domain.Shared;
 
 public class WorkItem : Entity
 {
+    private WorkItem()
+    {
+        Project = null!;
+        Summary = null!;
+        Description = null!;
+        Assignee = null!;
+        Reporter = null!;
+    }
+
     public WorkItem(Guid id, Project project, WorkItemType type, Summary summary, Description description, Priority priority, Resolution resolution, Person assignee, Person reporter, DateTime beginDate, DateTime endDate, Status status) : base(id)
     {
         Project = project;
