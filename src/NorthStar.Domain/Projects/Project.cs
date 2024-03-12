@@ -33,8 +33,8 @@ public class Project : Entity
 
     private Project(Guid id) : base(id) 
     {
-        this.Name = new Name(string.Empty);
-        this.Description = new Description(string.Empty);
+        this.Name = Name.NoName;
+        this.Description = Description.NoDescription;
         this.WorkItems = [];
     }
 

@@ -1,6 +1,6 @@
 ﻿using NorthStar.Application.Workitems.GetWorkItem;
 
-namespace NorthStar.Application.Projects.GetProject;
+namespace NorthStar.Application.Projects.Read;
 
 public sealed class ProjectResponse
 {

@@ -3,7 +3,7 @@ using NorthStar.Domain.Abstractions;
 using NorthStar.Domain.Projects;
 using NorthStar.Domain.Projects.Repository;
 
-namespace NorthStar.Application.Projects.CreateProject;
+namespace NorthStar.Application.Projects.Create;
 
 internal sealed class CreateProjectCommandHandler : ICommandHandler<CreateProjectCommand, Guid>
 {

@@ -1,11 +1,9 @@
-﻿namespace NorthStar.Application.Projects.GetProject;
-
-using NorthStar.Application.Abstractions.Messaging;
+﻿using NorthStar.Application.Abstractions.Messaging;
 using NorthStar.Domain.Abstractions;
 using NorthStar.Domain.Projects;
 using NorthStar.Domain.Projects.Repository;
-using System.Threading;
-using System.Threading.Tasks;
+
+namespace NorthStar.Application.Projects.Read;
 
 internal sealed class GetProjectQueryHandler : IQueryHandler<GetProjectQuery, ProjectResponse>
 {

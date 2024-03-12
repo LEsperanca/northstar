@@ -1,4 +1,4 @@
-﻿namespace NorthStar.Application.Projects.UpdateProject;
+﻿namespace NorthStar.Application.Projects.Update;
 
 using NorthStar.Application.Abstractions.Messaging;
 using NorthStar.Domain.Abstractions;
