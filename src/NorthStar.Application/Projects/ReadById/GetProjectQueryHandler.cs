@@ -3,7 +3,7 @@ using NorthStar.Domain.Abstractions;
 using NorthStar.Domain.Projects;
 using NorthStar.Domain.Projects.Repository;
 
-namespace NorthStar.Application.Projects.Read;
+namespace NorthStar.Application.Projects.ReadById;
 
 internal sealed class GetProjectQueryHandler : IQueryHandler<GetProjectQuery, ProjectResponse>
 {

@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NorthStar.Application.Projects.Create;
 using NorthStar.Application.Projects.Delete;
-using NorthStar.Application.Projects.Read;
+using NorthStar.Application.Projects.ReadById;
 using NorthStar.Application.Projects.Update;
 
 namespace NorthStar.Api.Controllers.Projects;
