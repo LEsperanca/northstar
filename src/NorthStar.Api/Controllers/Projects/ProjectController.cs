@@ -1,14 +1,14 @@
-﻿namespace NorthStar.Api.Controllers.Projects;
-
-using Asp.Versioning;
+﻿using Asp.Versioning;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using NorthStar.Application.Projects.CreateProject;
-using NorthStar.Application.Projects.DeleteProject;
-using NorthStar.Application.Projects.GetProject;
-using NorthStar.Application.Projects.UpdateProject;
+using NorthStar.Application.Projects.Create;
+using NorthStar.Application.Projects.Delete;
+using NorthStar.Application.Projects.ReadById;
+using NorthStar.Application.Projects.Update;
 
+namespace NorthStar.Api.Controllers.Projects;
 [ApiController]
+
 [ApiVersion(ApiVersions.V1)]
 [Route("api/v{version:apiVersion}/[controller]")]
 public class ProjectController : ControllerBase
@@ -44,7 +44,7 @@ public class ProjectController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(Guid id, ProjectRequest projectRequest, CancellationToken cancellationToken)
+    public async Task<IActionResult> Update(Guid id, UpdateProjectRequest projectRequest, CancellationToken cancellationToken)
     {
         var command = new UpdateProjectCommand(id, projectRequest.Name, projectRequest.Description);
 

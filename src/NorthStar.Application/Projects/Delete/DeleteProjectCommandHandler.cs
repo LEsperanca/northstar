@@ -1,12 +1,9 @@
-﻿namespace NorthStar.Application.Projects.DeleteProject;
-
-using MediatR;
-using NorthStar.Application.Abstractions.Messaging;
+﻿using NorthStar.Application.Abstractions.Messaging;
 using NorthStar.Domain.Abstractions;
 using NorthStar.Domain.Projects;
 using NorthStar.Domain.Projects.Repository;
-using System.Threading;
-using System.Threading.Tasks;
+
+namespace NorthStar.Application.Projects.Delete;
 
 internal sealed class DeleteProjectCommandHandler : ICommandHandler<DeleteProjectCommand>
 {

@@ -6,6 +6,9 @@ public class Name : ValueObject
 {
     public string Value { get; private set; }
 
+    public static Name NoName = new Name("NoName");
+
+
     public Name(string name)
     {
         if (string.IsNullOrEmpty(name))
