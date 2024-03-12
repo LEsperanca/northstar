@@ -1,4 +1,5 @@
 using NorthStar.Api.Extensions;
+using NorthStar.Api.OpenApi;
 using NorthStar.Application;
 using NorthStar.Infrastructure;
 
@@ -14,6 +15,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
+
+builder.Services.ConfigureOptions<ConfigureSwaggerOption>();
 
 var app = builder.Build();
 
