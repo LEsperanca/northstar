@@ -1,4 +1,5 @@
 using NorthStar.Api.Extensions;
+using NorthStar.Api.OpenApi;
 using NorthStar.Application;
 using NorthStar.Infrastructure;
 
@@ -7,15 +8,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddProblemDetails();
-builder.Services.AddApiVersioning().AddMvc();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
+
+builder.Services.ConfigureOptions<ConfigureSwaggerOption>();
 
 var app = builder.Build();
 

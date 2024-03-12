@@ -1,5 +1,6 @@
 ﻿namespace NorthStar.Infrastructure;
 
+using Asp.Versioning;
 using Bookify.Application.Abstractions.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -40,6 +41,24 @@ public static class DependencyInjection
 
         services.AddSingleton<ISqlConnectionFactory>(_ => new SqlConnectionFactory(connectionString));
 
+        AddApiVersioning(services);
+
         return services;
+    }
+
+    private static void AddApiVersioning(IServiceCollection services)
+    {
+        services.AddApiVersioning(options => 
+        {
+            options.DefaultApiVersion = new ApiVersion(1);
+            options.ReportApiVersions = true;
+            options.ApiVersionReader = new UrlSegmentApiVersionReader();
+        })
+        .AddMvc()
+        .AddApiExplorer(options =>
+        {
+            options.GroupNameFormat = "'v'V";
+            options.SubstituteApiVersionInUrl = true;
+        });
     }
 }
