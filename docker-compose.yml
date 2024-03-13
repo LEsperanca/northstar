@@ -22,3 +22,11 @@ services:
     ports:
      - 5432:5432
 
+  northstar-seq:
+    image: datalust/seq:latest
+    container_name: Northstar.Seq
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - 5341:5341
+      - 8081:80 

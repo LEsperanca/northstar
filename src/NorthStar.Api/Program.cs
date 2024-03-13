@@ -2,8 +2,13 @@ using NorthStar.Api.Extensions;
 using NorthStar.Api.OpenApi;
 using NorthStar.Application;
 using NorthStar.Infrastructure;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration)
+);
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -31,9 +36,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseRequestContextLogging();
+
+app.UseSerilogRequestLogging();
 
 app.UseCustomExceptionHandler();
+
+app.UseAuthorization();
 
 app.MapControllers();
 
