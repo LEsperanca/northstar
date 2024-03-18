@@ -25,5 +25,7 @@ internal sealed class PersonConfiguration : IEntityTypeConfiguration<Person>
         builder.Property(x => x.Role);
 
         builder.HasIndex(x => x.Email).IsUnique();
+
+        builder.HasIndex(x => x.IdentityId).IsUnique();
     }
 }
