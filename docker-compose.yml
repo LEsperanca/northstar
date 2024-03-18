@@ -29,4 +29,18 @@ services:
       - ACCEPT_EULA=Y
     ports:
       - 5341:5341
-      - 8081:80 
+      - 8081:80
+
+  northstar-idp:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: Northstar.Identity
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    command:
+      [ "start-dev",  "--import-realm" ]
+    volumes:
+      - ./.containers/identity:/opt/keycloak/data
+      - ./.files/northstar-realm-export.json:/opt/keycloak/data/import/realm.json
+    ports:
+      - 18080:8080
