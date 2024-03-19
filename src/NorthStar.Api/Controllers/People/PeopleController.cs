@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NorthStar.Api.Controllers.Projects;
 using NorthStar.Application.Persons.Create;
+using NorthStar.Application.Persons.GetLoggedInUser;
 using NorthStar.Application.Persons.Login;
 using NorthStar.Domain.Abstractions;
+using NorthStar.Domain.People;
 
 namespace NorthStar.Api.Controllers.People;
 
@@ -55,6 +57,17 @@ public class PeopleController : ControllerBase
         {
             return Unauthorized(result.Error);
         }
+
+        return Ok(result.Value);
+    }
+
+    [HttpGet("me")]
+    [Authorize(Roles = Roles.Registered)]
+    public async Task<IActionResult> GetLoggedInUser(CancellationToken cancellationToken)
+    {
+        var query = new GetLoggedInUserQuery();
+
+        Result<PersonResponse> result = await _sender.Send(query, cancellationToken);
 
         return Ok(result.Value);
     }
