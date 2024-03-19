@@ -22,10 +22,8 @@ internal sealed class PersonConfiguration : IEntityTypeConfiguration<Person>
             .IsRequired()
             .HasConversion(email => email.Value, value => new Domain.People.Email(value));
 
-        builder.Property(x => x.Role);
+        builder.Property(x => x.PersonRole);
 
         builder.HasIndex(x => x.Email).IsUnique();
-
-        builder.HasIndex(x => x.IdentityId).IsUnique();
     }
 }

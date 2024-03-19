@@ -1,5 +1,5 @@
 version: '3.4'
-
+name: northstar-service
 services:
   northstar.api:
     image: ${DOCKER_REGISTRY-}northstarapi
@@ -9,7 +9,7 @@ services:
       dockerfile: src/NorthStar.Api/Dockerfile
     depends_on:
       - northstar-db
-
+ 
   northstar-db:
     image: postgres:latest
     container_name: Northstar.Db
