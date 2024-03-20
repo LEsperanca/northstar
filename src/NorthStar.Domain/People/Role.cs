@@ -15,4 +15,5 @@ public sealed class Role
 
     public ICollection<Person> People { get; init; } = [];
 
+    public ICollection<Permission> Permissions { get; init; } = [];
 }

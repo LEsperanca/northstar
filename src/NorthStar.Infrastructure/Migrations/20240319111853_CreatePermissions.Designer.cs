@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NorthStar.Infrastructure;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NorthStar.Infrastructure.Migrations
 {
     [DbContext(typeof(NorthStarEfCoreDbContext))]
-    partial class NorthStarEfCoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240319111853_CreatePermissions")]
+    partial class CreatePermissions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,8 +39,15 @@ namespace NorthStar.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("name");
 
+                    b.Property<int?>("RoleId")
+                        .HasColumnType("integer")
+                        .HasColumnName("role_id");
+
                     b.HasKey("Id")
                         .HasName("pk_permissions");
+
+                    b.HasIndex("RoleId")
+                        .HasDatabaseName("ix_permissions_role_id");
 
                     b.ToTable("permissions", (string)null);
 
@@ -133,9 +143,6 @@ namespace NorthStar.Infrastructure.Migrations
 
                     b.HasKey("RoleId", "PermissionId")
                         .HasName("pk_role_permissions");
-
-                    b.HasIndex("PermissionId")
-                        .HasDatabaseName("ix_role_permissions_permission_id");
 
                     b.ToTable("role_permissions", (string)null);
 
@@ -296,6 +303,14 @@ namespace NorthStar.Infrastructure.Migrations
                     b.ToTable("person_role", (string)null);
                 });
 
+            modelBuilder.Entity("NorthStar.Domain.People.Permission", b =>
+                {
+                    b.HasOne("NorthStar.Domain.People.Role", null)
+                        .WithMany("Permissions")
+                        .HasForeignKey("RoleId")
+                        .HasConstraintName("fk_permissions_role_role_id");
+                });
+
             modelBuilder.Entity("NorthStar.Domain.People.Person", b =>
                 {
                     b.OwnsOne("NorthStar.Domain.People.Address", "Address", b1 =>
@@ -314,23 +329,6 @@ namespace NorthStar.Infrastructure.Migrations
                         });
 
                     b.Navigation("Address");
-                });
-
-            modelBuilder.Entity("NorthStar.Domain.People.RolePermission", b =>
-                {
-                    b.HasOne("NorthStar.Domain.People.Permission", null)
-                        .WithMany()
-                        .HasForeignKey("PermissionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_role_permissions_permissions_permission_id");
-
-                    b.HasOne("NorthStar.Domain.People.Role", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_role_permissions_roles_role_id");
                 });
 
             modelBuilder.Entity("NorthStar.Domain.Projects.Project", b =>
@@ -388,6 +386,11 @@ namespace NorthStar.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_person_role_role_roles_id");
+                });
+
+            modelBuilder.Entity("NorthStar.Domain.People.Role", b =>
+                {
+                    b.Navigation("Permissions");
                 });
 
             modelBuilder.Entity("NorthStar.Domain.Projects.Project", b =>
