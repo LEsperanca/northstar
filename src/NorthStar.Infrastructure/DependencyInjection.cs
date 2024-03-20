@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using NorthStar.Application.Abstractions.Authentication;
+using NorthStar.Application.Abstractions.Caching;
 using NorthStar.Application.Abstractions.Clock;
 using NorthStar.Application.Abstractions.Email;
 using NorthStar.Domain.Abstractions;
@@ -18,6 +19,7 @@ using NorthStar.Domain.Projects.Repository;
 using NorthStar.Domain.WorkItems.Repository;
 using NorthStar.Infrastructure.Authentication;
 using NorthStar.Infrastructure.Authorization;
+using NorthStar.Infrastructure.Caching;
 using NorthStar.Infrastructure.Clock;
 using NorthStar.Infrastructure.Data;
 using NorthStar.Infrastructure.Email;
@@ -40,7 +42,19 @@ public static class DependencyInjection
 
         AddApiVersioning(services);
 
+        AddCaching(services, configuration);
+
         return services;
+    }
+
+    private static void AddCaching(this IServiceCollection services, IConfiguration configuration)
+    {
+        var connectionString = configuration.GetConnectionString("Cache") ?? 
+            throw new ArgumentNullException(nameof(configuration));
+
+        services.AddStackExchangeRedisCache(options => options.Configuration = connectionString);
+
+        services.AddSingleton<ICacheService, CacheService>();
     }
 
     private static void AddAuthorization(IServiceCollection services)
