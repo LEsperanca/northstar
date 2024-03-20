@@ -8,6 +8,7 @@ using NorthStar.Application.Persons.GetLoggedInUser;
 using NorthStar.Application.Persons.Login;
 using NorthStar.Domain.Abstractions;
 using NorthStar.Domain.People;
+using NorthStar.Infrastructure.Authorization;
 
 namespace NorthStar.Api.Controllers.People;
 
@@ -62,7 +63,7 @@ public class PeopleController : ControllerBase
     }
 
     [HttpGet("me")]
-    [Authorize(Roles = Roles.Registered)]
+    [HasPermission(Permissions.PeopleRead)]
     public async Task<IActionResult> GetLoggedInUser(CancellationToken cancellationToken)
     {
         var query = new GetLoggedInUserQuery();
