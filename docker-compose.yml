@@ -44,3 +44,10 @@ services:
       - ./.files/northstar-realm-export.json:/opt/keycloak/data/import/realm.json
     ports:
       - 18080:8080
+
+  northstar-redis:
+    image: redis:latest
+    container_name: Norhstar.Redis
+    restart: always
+    ports:
+      - '6379:6379' 
