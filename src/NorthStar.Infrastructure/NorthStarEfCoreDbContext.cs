@@ -1,21 +1,30 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using NorthStar.Application.Abstractions.Clock;
 using NorthStar.Application.Abstractions.Exceptions;
 using NorthStar.Domain.Abstractions;
+using NorthStar.Infrastructure.Outbox;
 
 namespace NorthStar.Infrastructure;
 public sealed class NorthStarEfCoreDbContext : DbContext, IUnitOfWork
 {
+    private static readonly JsonSerializerSettings JsonSerializerSettings = new()
+    {
+        TypeNameHandling = TypeNameHandling.All
+    };
+
+    private readonly IDateTimeProvider _dateTimeProvider;
 
     private readonly ILoggerFactory _loggerFactory;
-    private readonly IPublisher _publisher;
+
+
     public NorthStarEfCoreDbContext(DbContextOptions dbContextOptions, 
         ILoggerFactory loggerFactory,
-        IPublisher publisher) :base(dbContextOptions)
+        IDateTimeProvider dateTimeProvider) :base(dbContextOptions)
     {
         _loggerFactory = loggerFactory;
-        _publisher = publisher;
+        _dateTimeProvider = dateTimeProvider;
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -37,9 +46,9 @@ public sealed class NorthStarEfCoreDbContext : DbContext, IUnitOfWork
     {
         try
         {
-            var result = await base.SaveChangesAsync(cancellationToken);
+            AddDomainEventsAsOutboxMessages();
 
-            await PublishDomainEventsAsync();
+            var result = await base.SaveChangesAsync(cancellationToken);
 
             return result;
         }
@@ -50,9 +59,9 @@ public sealed class NorthStarEfCoreDbContext : DbContext, IUnitOfWork
         }
     }
 
-    private async Task PublishDomainEventsAsync()
+    private void AddDomainEventsAsOutboxMessages()
     {
-        var domainEvents = ChangeTracker
+        var outboxMessages = ChangeTracker
             .Entries<Entity>()
             .Select(entry => entry.Entity)
             .SelectMany(entity =>
@@ -63,11 +72,13 @@ public sealed class NorthStarEfCoreDbContext : DbContext, IUnitOfWork
 
                 return domainEvents;
             })
+            .Select(domainEvent => new OutboxMessage(
+                Guid.NewGuid(),
+                _dateTimeProvider.UtcNow,
+                domainEvent.GetType().Name,
+                JsonConvert.SerializeObject(domainEvent, JsonSerializerSettings)))
             .ToList();
 
-        foreach (var domainEvent in domainEvents)
-        {
-            await _publisher.Publish(domainEvent);
-        }
+        AddRange(outboxMessages);
     }
 }

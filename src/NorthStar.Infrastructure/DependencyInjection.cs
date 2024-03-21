@@ -23,7 +23,9 @@ using NorthStar.Infrastructure.Caching;
 using NorthStar.Infrastructure.Clock;
 using NorthStar.Infrastructure.Data;
 using NorthStar.Infrastructure.Email;
+using NorthStar.Infrastructure.Outbox;
 using NorthStar.Infrastructure.Repositories;
+using Quartz;
 
 public static class DependencyInjection
 {
@@ -46,7 +48,20 @@ public static class DependencyInjection
 
         AddHealthChecks(services, configuration);
 
+        AddBackgroundJobs(services, configuration);
+
         return services;
+    }
+
+    private static void AddBackgroundJobs(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.Configure<OutboxOptions>(configuration.GetSection("Outbox"));
+
+        services.AddQuartz();
+
+        services.AddQuartzHostedService(options => options.WaitForJobsToComplete = true);
+
+        services.ConfigureOptions<ProcessOutboxMessagesJobSetup>();
     }
 
     private static void AddHealthChecks(this IServiceCollection services, IConfiguration configuration)
