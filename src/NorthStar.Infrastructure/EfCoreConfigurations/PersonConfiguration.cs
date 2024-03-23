@@ -14,7 +14,7 @@ internal sealed class PersonConfiguration : IEntityTypeConfiguration<Person>
         builder.Property(x => x.Name)
             .IsRequired()
             .HasMaxLength(200)
-            .HasConversion(x => x.Value, value => new Name(value));
+            .HasConversion(x => x.Value, value => new PersonName(value));
         
         builder.OwnsOne(x => x.Address);
 

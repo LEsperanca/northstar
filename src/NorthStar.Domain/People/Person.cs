@@ -6,7 +6,7 @@ public class Person : Entity
 {
     private readonly List<Role> _roles = new();
 
-    public Name Name { get; private set; }
+    public PersonName Name { get; private set; }
 
     public Address? Address { get; private set; }
 
@@ -29,7 +29,7 @@ public class Person : Entity
         Email = null!;
     }
 
-    private Person(Guid id, Name name, PersonRole role, Address? address, Email email) : base(id)
+    private Person(Guid id, PersonName name, PersonRole role, Address? address, Email email) : base(id)
     {
         PersonRole = role;
         Address = address;
@@ -39,7 +39,7 @@ public class Person : Entity
 
     public static Person Create(string name, string email)
     {
-        var person = new Person(Guid.NewGuid(), new Name(name), PersonRole.None, null, new Email(email));
+        var person = new Person(Guid.NewGuid(), name, PersonRole.None, null, email);
 
         person._roles.Add(Role.Registered);
 
