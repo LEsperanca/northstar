@@ -1,7 +1,6 @@
-﻿using FluentAssertions;
-using NorthStar.Domain.Projects;
+﻿using NorthStar.Domain.Projects;
 
-namespace Northstar.Domain.UnitTests.People;
+namespace Northstar.Domain.UnitTests.Projects;
 public class ProjectTests
 {
     [Fact]
@@ -28,7 +27,7 @@ public class ProjectTests
         var projectDescription = "Project Name Description";
 
         //Act
-        Action action = () => Project.Create(null!, projectDescription); 
+        Action action = () => Project.Create(null!, projectDescription);
 
         //Assert
         action.Should().Throw<ArgumentNullException>()
