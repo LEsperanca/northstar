@@ -23,7 +23,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NorthStar.Application\NorthStar.Application.csproj" />
-    <ProjectReference Include="..\NorthStar.Domain\NorthStar.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Northstar.Application.IntegrationTests"/>
   </ItemGroup>
 
 </Project>
