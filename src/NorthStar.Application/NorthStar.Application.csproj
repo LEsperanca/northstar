@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Abstractions\Data\" />
+    <Compile Remove="Abstractions\Data\**" />
+    <EmbeddedResource Remove="Abstractions\Data\**" />
+    <None Remove="Abstractions\Data\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Projects\Read\" />
   </ItemGroup>
 
@@ -23,4 +28,8 @@
     <ProjectReference Include="..\NorthStar.Domain\NorthStar.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Northstar.Application.UnitTests" />
+  </ItemGroup>
+  
 </Project>

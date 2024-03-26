@@ -13,7 +13,7 @@ public class Project : Entity
         WorkItems = [];
     }
 
-    private Project(Guid id, Name name, Description description, DateTime beginDate, DateTime? endDate, Person? lead, IList<WorkItem> workItems) : base(id)
+    private Project(Guid id, ProjectName name, Description description, DateTime beginDate, DateTime? endDate, Person? lead, IList<WorkItem> workItems) : base(id)
     {
         this.Name = name;
         this.Description = description;
@@ -23,7 +23,7 @@ public class Project : Entity
         this.WorkItems = workItems;
     }
 
-    private Project(Guid id, Name name, Description description) : base(id)
+    private Project(Guid id, ProjectName name, Description description) : base(id)
     {
         this.Name = name;
         this.Description = description;
@@ -33,12 +33,12 @@ public class Project : Entity
 
     private Project(Guid id) : base(id) 
     {
-        this.Name = Name.NoName;
+        this.Name = ProjectName.NoName;
         this.Description = Description.NoDescription;
         this.WorkItems = [];
     }
 
-    public Name Name { get; private set; }
+    public ProjectName Name { get; private set; }
 
     public Description Description { get; private set; }
 
@@ -62,13 +62,15 @@ public class Project : Entity
 
     public static Project Create(string projectName, string description)
     {
-        var project = new Project(Guid.NewGuid(), new Name(projectName), new Description(description));
+        var project = new Project(Guid.NewGuid(), projectName, description);
 
         return project;
     }
 
     public static Project Create(Guid id)
     {
+        //TODO validate Guid default value, or null
+
         var project = new Project(id);
 
         return project;

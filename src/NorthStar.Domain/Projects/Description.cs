@@ -13,6 +13,10 @@ public class Description : ValueObject
         Value = description;
     }
 
+    public static implicit operator Description(string description) => new(description);
+
+    public override string ToString() => Value;
+
     protected override IEnumerable<object> GetEqualityComponents()
     {
         yield return Value;

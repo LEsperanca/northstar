@@ -13,7 +13,7 @@ internal sealed class ProjectConfiguration : IEntityTypeConfiguration<Project>
 
         builder.Property(x => x.Name)
             .HasMaxLength(200)
-            .HasConversion(name => name.Value, value => new Domain.Projects.Name(value));
+            .HasConversion(name => name.Value, value => new Domain.Projects.ProjectName(value));
 
         builder.Property(x => x.Description)
             .HasMaxLength(2000)
