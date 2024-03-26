@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northstar.Domain.UnitTests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northstar.Application.UnitTests", "test\Northstar.Application.UnitTests\Northstar.Application.UnitTests.csproj", "{DDA7B783-9D40-40C3-B7EA-2CC8A1E13225}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Northstar.Application.IntegrationTests", "test\Northstar.Application.IntegrationTests\Northstar.Application.IntegrationTests.csproj", "{422C3842-E91A-446B-8416-17B6800ACA6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{DDA7B783-9D40-40C3-B7EA-2CC8A1E13225}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDA7B783-9D40-40C3-B7EA-2CC8A1E13225}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDA7B783-9D40-40C3-B7EA-2CC8A1E13225}.Release|Any CPU.Build.0 = Release|Any CPU
+		{422C3842-E91A-446B-8416-17B6800ACA6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{422C3842-E91A-446B-8416-17B6800ACA6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{422C3842-E91A-446B-8416-17B6800ACA6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{422C3842-E91A-446B-8416-17B6800ACA6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +74,7 @@ Global
 		{5CAD7B8D-CE5E-42F9-88DE-E0C33E064755} = {5B4CA734-E787-45EB-BBD6-23CE2A277870}
 		{FE36B4BB-FEAA-47AE-92F5-5CC666EF516A} = {69BD0F99-0A30-43D6-878C-9A6BB5D9E4B5}
 		{DDA7B783-9D40-40C3-B7EA-2CC8A1E13225} = {69BD0F99-0A30-43D6-878C-9A6BB5D9E4B5}
+		{422C3842-E91A-446B-8416-17B6800ACA6E} = {69BD0F99-0A30-43D6-878C-9A6BB5D9E4B5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {87D9B74F-765F-4C24-88EA-E62C23E7D09A}
