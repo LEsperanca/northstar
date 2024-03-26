@@ -110,8 +110,8 @@ public class ProjectTests
     {
         //Arrange
         _projectRepositoryMock.Setup(pr => pr.Delete(It.IsAny<Project>()));
-
-        var deleteProjectCommand = new DeleteProjectCommand(It.IsAny<Guid>());
+        var guid = Guid.NewGuid();
+        var deleteProjectCommand = new DeleteProjectCommand(guid);
         var deleteProjectCommandHandler = new DeleteProjectCommandHandler(_projectRepositoryMock.Object, _unitOfWorkMock.Object);
 
         //Act
@@ -120,5 +120,6 @@ public class ProjectTests
         //Assert
         result.Should().NotBeNull();
         result.IsSuccess.Should().BeTrue();
+        _projectRepositoryMock.Verify(repo => repo.Delete(It.Is<Project>(p => p.Id == guid )), Times.Once);
     }
 }
