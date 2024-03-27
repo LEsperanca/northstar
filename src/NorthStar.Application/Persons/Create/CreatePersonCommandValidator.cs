@@ -9,6 +9,6 @@ internal sealed class CreatePersonCommandValidator : AbstractValidator<CreatePer
 
         RuleFor(c => c.Email).EmailAddress();
 
-        RuleFor(c => c.Password).NotEmpty().MaximumLength(5);
+        RuleFor(c => c.Password).NotEmpty().MinimumLength(5);
     }
 }

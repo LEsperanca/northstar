@@ -10,6 +10,7 @@ using Quartz;
 using System.Data;
 
 namespace NorthStar.Infrastructure.Outbox;
+
 [DisallowConcurrentExecution]
 internal sealed class ProcessOutboxMessagesJob : IJob
 {
