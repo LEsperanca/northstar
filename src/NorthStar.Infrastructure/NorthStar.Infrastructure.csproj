@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="Northstar.Application.IntegrationTests"/>
+    <InternalsVisibleTo Include="Northstar.Api.FunctionalTests"/>
   </ItemGroup>
 
 </Project>
